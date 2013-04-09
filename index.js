@@ -1,9 +1,8 @@
 function Tree(title, duration) {
     this.title = title;
     this._children = {};
-    this._tests = [];
 
-    if (duration) {
+    if (duration !== undefined) {
         this._duration = duration;
     }
 }

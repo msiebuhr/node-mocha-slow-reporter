@@ -47,6 +47,15 @@ Tree.prototype.__defineGetter__('duration', function () {
         .reduce(function (prev, cur) { return prev + cur; }, 0);
 });
 
+Tree.prototype.__defineGetter__('length', function () {
+    if ('_duration' in this) { return 1; }
+
+    var that = this;
+    return Object.keys(this._children)
+        .map(function (childName) { return that._children[childName].length; })
+        .reduce(function (prev, cur) { return prev + cur; }, 0);
+});
+
 function SlowReporter(runner) {
     var doneTests = [];
     var passes = 0,

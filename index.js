@@ -59,8 +59,6 @@ Tree.prototype.__defineGetter__('length', function () {
 
 function SlowReporter(runner) {
     var doneTests = [];
-    var passes = 0,
-        failures = 0;
 
     function getParentTitles(t) {
         var parentTitles = [],
@@ -77,20 +75,18 @@ function SlowReporter(runner) {
     // Store in a tree
     var T = new Tree('Whole Suite');
 
-    runner.on('pass', function (test) {
+    runner.on('test end', function (test) {
         T.addTest(getParentTitles(test), test);
-        //process.stdout.write('\rRunning: ' + T.duration + ' ms');
-        //doneTests.push(test);
     });
 
-    runner.on('fail', function(test, err){
-        console.log('fail: %s -- error: %s', test.fullTitle(), err.message);
+    runner.on('hook end', function (hook) {
+        T.addTest(getParentTitles(hook), hook);
     });
 
     runner.on('end', function(){
         //process.stdout.write('\r');
         T.toString();
-        process.exit(failures);
+        process.exit(0);
     });
 }
 

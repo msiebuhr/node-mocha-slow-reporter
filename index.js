@@ -26,7 +26,8 @@ Tree.prototype.addTest = function (titles, test) {
 
 Tree.prototype.toString = function (indent) {
     indent = indent || '';
-    console.log('%d\t%s%s', this.duration, indent, this.title)
+
+    console.log('%d ㎳\t%s%s', this.duration, indent, this.title)
 
     var children = Object.keys(this._children),
         that = this;

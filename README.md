@@ -2,7 +2,7 @@ Mocha Slow Reporter
 ===================
 
 Reports what tests are the slowest in your
-[Mocha](http://visionmedia.github.io/mocha/) test-suite.
+[Mocha](http://mochajs.org/) test-suite.
 
 Screenshot:
 

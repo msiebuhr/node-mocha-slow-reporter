@@ -1,10 +1,12 @@
-function Tree(title, duration) {
+function Tree(title) {
     this.title = title;
+    this.calls = 0;
     this._children = {};
+}
 
-    if (duration !== undefined) {
-        this._duration = duration;
-    }
+Tree.prototype.addDuration = function (duration) {
+    this.calls += 1;
+    this._duration = (this._duration || 0) + duration;
 }
 
 Tree.prototype.addTest = function (titles, test) {
@@ -12,7 +14,10 @@ Tree.prototype.addTest = function (titles, test) {
 
     // Add a leaf
     if (titles.length === 0) {
-        this._children[test.title] = new Tree(test.title, test.duration);
+        if (!(title in this._children)) {
+            this._children[title] = new Tree(title);
+        }
+        this._children[title].addDuration(test.duration);
         return;
     }
 
@@ -27,7 +32,11 @@ Tree.prototype.addTest = function (titles, test) {
 Tree.prototype.toString = function (indent) {
     indent = indent || '';
 
-    console.log('%d ㎳\t%s%s', this.duration, indent, this.title)
+    if (this.calls > 1) {
+        console.log('%d ㎳\t%s%s (%d calls)', this.duration, indent, this.title, this.calls);
+    } else {
+        console.log('%d ㎳\t%s%s', this.duration, indent, this.title);
+    }
 
     var children = Object.keys(this._children),
         that = this;

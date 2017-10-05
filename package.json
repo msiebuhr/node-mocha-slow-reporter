@@ -1,6 +1,6 @@
 {
   "name": "mocha-slow-reporter",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Reports the slowest tests in the test-suite.",
   "main": "index.js",
   "scripts": {
